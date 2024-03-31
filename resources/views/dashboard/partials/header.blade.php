@@ -8,7 +8,7 @@
         <li class="nav-item nav-notif">
             <a class="nav-link text-muted my-2" href="./#" data-toggle="modal" data-target=".modal-notif">
                 <span class="fe fe-bell fe-16"></span>
-                <span class="dot dot-md bg-success"></span>
+                <span class="dot dot-md text-danger">{{ count(Auth::guard('admin')->user()->unreadnotifications) }}</span>
             </a>
         </li>
 
@@ -24,9 +24,10 @@
                             </button>
                         </div>
                         <div class="modal-body">
+                            @if(count(Auth::guard('admin')->user()->notifications) > 0)
                             <div class="list-group list-group-flush my-n3">
-                                @foreach (Auth::guard('admin')->user()->notifications as $notification)
-                                <div class="list-group-item bg-transparent">
+                                @foreach (Auth::guard('admin')->user()->notifications->take(5) as $notification)
+                                <div class="list-group-item @if($notification->unread()) bg-light @else bg-transparent @endif">
                                     <div class="row align-items-center">
                                         <div class="col-auto">
                                             <span class="fe fe-box fe-24"></span>
@@ -34,12 +35,13 @@
                                         <div class="col">
                                             <small><strong>Novo usuário registrado</strong></small>
                                             <div class="my-0 text-muted small">{{ $notification->data['message'] }}</div>
-                                            <small class="badge badge-pill badge-light text-muted">{{ $notification->created_at }}</small>
+                                            <small class="badge badge-pill badge-light text-muted">{{ $notification->created_at->diffForHumans() }}</small>
                                         </div>
                                     </div>
                                 </div> <!-- / .row -->
                                 @endforeach
                             </div> <!-- / .list-group -->
+                            @endif
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Clear
