@@ -28,3 +28,23 @@
 <script src='{{ asset('assets') }}/js/dropzone.min.js'></script>
 <script src='{{ asset('assets') }}/js/uppy.min.js'></script>
 <script src='{{ asset('assets') }}/js/quill.min.js'></script>
+
+<script>
+    $('document').ready(function(){
+
+        $(document).on('click', ".notificationsIcon", function(){
+            
+            $.ajax({
+                url: {{ Illuminate\Support\Js::from(route('admin.notification.read'))}},
+                method: 'get',
+                success: function(data) {},
+                error: function(){
+                    alert('Tente novamente..');
+                },
+
+            });
+
+        });
+
+    });
+</script>

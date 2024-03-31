@@ -6,7 +6,7 @@
     <ul class="nav">
 
         <li class="nav-item nav-notif">
-            <a class="nav-link text-muted my-2" href="./#" data-toggle="modal" data-target=".modal-notif">
+            <a class="nav-link text-muted my-2 notificationsIcon" href="./#" data-toggle="modal" data-target=".modal-notif">
                 <span class="fe fe-bell fe-16"></span>
                 <span class="dot dot-md text-danger">{{ count(Auth::guard('admin')->user()->unreadnotifications) }}</span>
             </a>
