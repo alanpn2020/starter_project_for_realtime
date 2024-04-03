@@ -37,7 +37,29 @@
             $.ajax({
                 url: {{ Illuminate\Support\Js::from(route('admin.notification.read'))}},
                 method: 'get',
-                success: function(data) {},
+                success: function(data) {
+                    $('#notificationsIconCounter').load(' #notificationsIconCounter > *');
+                    $('#notificationsModal').load(' #notificationsModal > *');
+                    
+                },
+                error: function(){
+                    alert('Tente novamente..');
+                },
+
+            });
+
+        });
+
+        $(document).on('click', "#clearNotifications", function(){
+            
+            $.ajax({
+                url: {{ Illuminate\Support\Js::from(route('admin.notification.clear'))}},
+                method: 'get',
+                success: function(data) {
+                    $('#notificationsIconCounter').load(' #notificationsIconCounter > *');
+                    $('#notificationsModal').load(' #notificationsModal > *');
+                    
+                },
                 error: function(){
                     alert('Tente novamente..');
                 },
