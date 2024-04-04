@@ -15,6 +15,7 @@ use Illuminate\View\View;
 use App\Notifications\NewUserRegisteredNotification;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Notification;
+use App\Events\NewUserRegisteredEvent;
 
 
 class RegisteredUserController extends Controller
@@ -53,8 +54,12 @@ class RegisteredUserController extends Controller
         $admin->notify(new NewUserRegisteredNotification($user));
         // Notification::send($admin, new NewUserRegisteredNotification($user));
 
-        $admins = Admin::all();
-        Notification::send($admins, new NewUserRegisteredNotification($user));
+        // $admins = Admin::all();
+        // Notification::send($admins, new NewUserRegisteredNotification($user));
+
+        //EVENTO BROADCAST
+        NewUserRegisteredEvent::dispatch();
+        Broadcast(new NewUserRegisteredEvent());
 
         Auth::login($user);
 
