@@ -8,7 +8,7 @@
         <li class="nav-item nav-notif">
             <a class="nav-link text-muted my-2 notificationsIcon" href="./#" data-toggle="modal" data-target=".modal-notif">
                 <span class="fe fe-bell fe-16"></span>
-                <span class="dot dot-md text-danger">{{ count(Auth::guard('admin')->user()->unreadnotifications) }}</span>
+                <span class="dot dot-md text-danger" id="notificationsIconCounter">{{ count(Auth::guard('admin')->user()->unreadnotifications) }}</span>
             </a>
         </li>
 
@@ -23,7 +23,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body" id="notificationsModal">
                             @if(count(Auth::guard('admin')->user()->notifications) > 0)
                             <div class="list-group list-group-flush my-n3">
                                 @foreach (Auth::guard('admin')->user()->notifications->take(5) as $notification)
@@ -44,7 +44,7 @@
                             @endif
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Clear
+                            <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal" id="clearNotifications">Clear
                                 All</button>
                         </div>
                     </div>

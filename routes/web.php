@@ -53,6 +53,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/notification/markasread', function(){
             Auth::guard('admin')->user()->notifications->markAsRead();
         })->name('notification.read');
+
+        ##------------------------------------------------------- LIMPAR TODAS NOTIFICAÇÕES
+        Route::get('/notification/clear', function(){
+            Auth::guard('admin')->user()->notifications()->delete();
+        })->name('notification.clear');
         
     });
 
