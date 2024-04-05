@@ -58,8 +58,8 @@ class RegisteredUserController extends Controller
         // Notification::send($admins, new NewUserRegisteredNotification($user));
 
         //EVENTO BROADCAST
-        NewUserRegisteredEvent::dispatch();
-        Broadcast(new NewUserRegisteredEvent());
+        NewUserRegisteredEvent::dispatch($user);
+        // Broadcast(new NewUserRegisteredEvent());
 
         Auth::login($user);
 
